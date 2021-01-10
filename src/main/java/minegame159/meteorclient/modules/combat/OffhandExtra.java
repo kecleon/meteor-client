@@ -126,6 +126,7 @@ public class OffhandExtra extends Module {
     @EventHandler
     private final Listener<PostTickEvent> onTick = new Listener<>(event -> {
         assert mc.player != null;
+        currentMode = mode.get();
 
         if (mc.currentScreen != null && ((!(mc.currentScreen instanceof InventoryScreen) && !(mc.currentScreen instanceof WidgetScreen)) || !asimov.get())) return;
         if (!mc.player.isUsingItem()) isClicking = false;
@@ -165,7 +166,6 @@ public class OffhandExtra extends Module {
             }
 
         }
-        if (!(mc.player.getMainHandStack().getItem() instanceof SwordItem) && !(mc.player.getMainHandStack().getItem() instanceof EnchantedGoldenAppleItem)) currentMode = mode.get();
     });
 
     @EventHandler
@@ -193,6 +193,7 @@ public class OffhandExtra extends Module {
                 doMove(result);
                 sentMessage = false;
             }
+            currentMode = mode.get();
         }
     });
 
@@ -226,10 +227,10 @@ public class OffhandExtra extends Module {
         boolean empty = mc.player.getOffHandStack().isEmpty();
         List<Integer> slots = new ArrayList<>();
         if(mc.player.inventory.getCursorStack().getItem() != Items.TOTEM_OF_UNDYING) {
-            slots.add(slot);
+            slots.add(InvUtils.invIndexToSlotId(slot));
         }
-        slots.add(InvUtils.OFFHAND_SLOT);
-        if (!empty) slots.add(slot);
+        slots.add(InvUtils.invIndexToSlotId(InvUtils.OFFHAND_SLOT));
+        if (!empty) slots.add(InvUtils.invIndexToSlotId(slot));
         InvUtils.addSlots(slots, this.getClass());
     }
 

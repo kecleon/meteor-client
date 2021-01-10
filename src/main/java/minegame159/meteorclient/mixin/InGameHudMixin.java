@@ -77,4 +77,9 @@ public abstract class InGameHudMixin {
     private void onRenderScoreboardSidebar(MatrixStack matrixStack, ScoreboardObjective scoreboardObjective, CallbackInfo info) {
         if (ModuleManager.INSTANCE.get(NoRender.class).noScoreboard()) info.cancel();
     }
+
+    @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
+    private void onRenderCrosshair(MatrixStack matrices, CallbackInfo info) {
+        if (ModuleManager.INSTANCE.get(NoRender.class).noCrosshair()) info.cancel();
+    }
 }

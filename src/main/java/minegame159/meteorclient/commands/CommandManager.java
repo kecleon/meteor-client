@@ -9,6 +9,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import minegame159.meteorclient.commands.commands.*;
+import minegame159.meteorclient.commands.commands.swarm.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientCommandSource;
 import net.minecraft.command.CommandSource;
@@ -18,10 +19,7 @@ public class CommandManager {
     private static final CommandSource COMMAND_SOURCE = new ChatCommandSource(MinecraftClient.getInstance());
 
     public static void init() {
-        addCommand(new Bind());
         addCommand(new ClearChat());
-        addCommand(new Modules());
-        addCommand(new Settings());
         addCommand(new Enchant());
         addCommand(new Reset());
         addCommand(new Panic());
@@ -31,8 +29,6 @@ public class CommandManager {
         addCommand(new Say());
         addCommand(new Ignore());
         addCommand(new Drop());
-        addCommand(new HClip());
-        addCommand(new VClip());
         addCommand(new Friend());
         addCommand(new Peek());
         addCommand(new FakePlayerCommand());
@@ -48,6 +44,9 @@ public class CommandManager {
         addCommand(new SwarmScatter());
         addCommand(new SwarmModuleToggle());
         addCommand(new SwarmQueen());
+        addCommand(new Clip());
+        addCommand(new Bind());
+        addCommand(new Toggle());
     }
 
     public static void dispatch(String message) throws CommandSyntaxException {
